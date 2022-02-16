@@ -2,8 +2,6 @@
 
 This program allows you to simulate poker games and write AI agents to play in those games.
 
-Or at least, it will...
-
 ## Why?
 
 - Because I feel like it?
@@ -12,28 +10,37 @@ Or at least, it will...
 - To try out reinforcement learning agents.
 - To get better at poker.
 
-## How
+## How?
 
 - Figure out how to play poker (ie the rules) --> Online poker...
 - Design Architecture
 - Code...
 
-### Development
+## Running a game
 
-```Bash
+To use this software all you need is Python 3:
+
+```bash
 python -m src
 ```
 
-### Testing
+## Development
 
-```Bash
-pytest -c tests/pytest.ini
+For development this project uses ```virtualenv``` for its Python environment, ```expect``` for coloured terminal output, ```pytest``` as a testing framework, and ```doit``` as a build tool.
+
+To get started:
+
+```bash
+sudo apt install expect
+virtualenv env
+source env/bin/activate
+pip install pytest doit
 ```
 
-### Cleanup
+See dodo.py for build commands using doit build tool.
 
-```Bash
-find . -type d -name '__pycache__' -exec rm -r {} \;
+```bash
+doit list
 ```
 
 ## License
