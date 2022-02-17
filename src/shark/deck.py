@@ -12,3 +12,13 @@
 # You should have received a copy of the GNU Affero General Public License along with shark. If 
 # not, see <https://www.gnu.org/licenses/>.
 
+from . import card
+
+class Deck():
+    def __init__(self):
+        self.cards = [card.Card(rank, suit) for rank in card.Rank for suit in card.Suit]
+        self.shuffle()
+ 
+    def shuffle(self):
+        # TODO: Do this properly, to avoid bias in simulations.
+        pass

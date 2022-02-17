@@ -12,11 +12,7 @@
 # You should have received a copy of the GNU Affero General Public License along with shark. If 
 # not, see <https://www.gnu.org/licenses/>.
 
-from . import game
-
-# TODO: Add player count as a CLI argument.
-PLAYER_COUNT = 5
-
-def run():
-    new_game = game.Game(PLAYER_COUNT)
-    new_game.print_deck()
+'''
+Mayb just use functions for this, to avoid relying too heavily on state
+for managing the gui?
+'''

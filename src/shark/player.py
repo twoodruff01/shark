@@ -13,4 +13,9 @@
 # not, see <https://www.gnu.org/licenses/>.
 
 class Player():
-    pass
+    def __init__(self):
+        self.hand = None
+        self.agent = None
+    
+    def get_action(self, game_state):
+        pass

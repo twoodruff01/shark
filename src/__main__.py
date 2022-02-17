@@ -12,10 +12,6 @@
 # You should have received a copy of the GNU Affero General Public License along with shark. If
 # not, see <https://www.gnu.org/licenses/>.
 
-from .shark import game
+from .shark import game_runner
 
-print('hey hey :)')
-
-new_game = game.Game()
-
-new_game.run()
+game_runner.run()

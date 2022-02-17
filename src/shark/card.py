@@ -12,11 +12,18 @@
 # You should have received a copy of the GNU Affero General Public License along with shark. If 
 # not, see <https://www.gnu.org/licenses/>.
 
-from . import game
+import enum
 
-# TODO: Add player count as a CLI argument.
-PLAYER_COUNT = 5
+class Rank(enum.Enum):
+    TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING, ACE = range(13)
 
-def run():
-    new_game = game.Game(PLAYER_COUNT)
-    new_game.print_deck()
+class Suit(enum.Enum):
+    SPADE, CLUB, DIAMOND, HEART = range(4)
+
+class Card():
+    def __init__(self, rank, suit):
+        self.rank = rank
+        self.suit = suit
+    
+    def __str__(self):
+        return f'{str(self.rank.name)} of {str(self.suit.name)}s'.lower()

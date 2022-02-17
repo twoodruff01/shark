@@ -23,10 +23,10 @@
   1. just one log file that everything goes into. Would run into issues if you use multiprocessing for agents.
   2. A game log file, and also one log file per agent.
 
+## CLI:
+
+- Would be nice to be able to pass command line parameters in.
+
 ## Backtesting:
 
 - Not a priority, but if anyone else ends up using this thing, this would be a great feature.
-
-## Testing:
-
-- Use some basic shitty tests from the start so it's at least built in and you don't have to refactor.
