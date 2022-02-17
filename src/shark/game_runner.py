@@ -20,3 +20,12 @@ PLAYER_COUNT = 5
 def run():
     new_game = game.Game(PLAYER_COUNT)
     new_game.print_deck()
+    '''
+    Create a new game.
+    Decide if showing gui or not.
+    Deal
+    while not new_game.is_won():
+        for player in players:
+            action = func_timeout(player.get_action(new_game))
+            new_game.apply_action(action)
+    '''
