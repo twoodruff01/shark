@@ -16,6 +16,9 @@ from . import deck
 from . import player
 
 class Game():
+    '''
+    Figure out how to move dealer
+    '''
     def __init__(self, player_count):
         if player_count <= 1:
             print('player count too low')
@@ -26,3 +29,44 @@ class Game():
     def print_deck(self):
         for card in self.deck.cards:
             print(card)
+    
+    def round(self):
+        self.deal()
+        self.bet()
+        self.flop()
+        self.bet()
+        self.turn()
+        self.bet()
+        self.river()
+        self.bet()
+
+    def deal(self):
+        '''
+        deal one card per player in clockwise direction from dealer's left
+        do it again
+        '''
+        pass
+
+    def bet(self):
+        '''
+        goes around till everyone is equal and either in or out
+        '''
+        pass
+
+    def flop(self):
+        '''
+        three cards
+        '''
+        pass
+    
+    def turn(self):
+        '''
+        one card
+        '''
+        pass
+    
+    def river(self):
+        '''
+        last chance!
+        '''
+        pass

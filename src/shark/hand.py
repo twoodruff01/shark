@@ -13,4 +13,7 @@
 # not, see <https://www.gnu.org/licenses/>.
 
 class Hand():
+    '''
+    Should definitely have a comparator to make figuring out a winner easy
+    '''
     pass

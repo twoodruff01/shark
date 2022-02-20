@@ -19,3 +19,12 @@ class Player():
     
     def get_action(self, game_state):
         pass
+
+'''
+Bet Actions:
+    fold
+    call
+    raise
+    reraise
+    check
+'''

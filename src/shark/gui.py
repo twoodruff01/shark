@@ -13,6 +13,14 @@
 # not, see <https://www.gnu.org/licenses/>.
 
 '''
-Mayb just use functions for this, to avoid relying too heavily on state
+Maybe just use functions for this, to avoid relying too heavily on state
 for managing the gui?
 '''
+
+from tkinter import Tk, Label
+
+def hello_world():
+    root = Tk()
+    a = Label(root, text ="Hello World")
+    a.pack()
+    root.mainloop()
