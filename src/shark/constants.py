@@ -12,16 +12,11 @@
 # You should have received a copy of the GNU Affero General Public License along with shark. If 
 # not, see <https://www.gnu.org/licenses/>.
 
-from . import card
+'''
+TODO: Add CLI parser and arguments instead of this file.
+'''
 
-class Deck():
-    def __init__(self):
-        self.cards = [card.Card(rank, suit) for rank in card.Rank for suit in card.Suit]
-        self.shuffle()
- 
-    def shuffle(self):
-        # TODO: Do this properly, to avoid bias in simulations.
-        pass
-
-    def deal(self):
-        return self.cards.pop()
+PLAYER_COUNT = 5
+HOLE_CARDS   = 2
+THINK_TIME   = 3
+BUY_IN       = 5

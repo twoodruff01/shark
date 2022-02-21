@@ -26,4 +26,4 @@ class Card():
         self.suit = suit
     
     def __str__(self):
-        return f'{str(self.rank.name)} of {str(self.suit.name)}s'.lower()
+        return f'{str(self.rank.name)} {str(self.suit.name)}s'.lower()
