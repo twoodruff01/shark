@@ -19,13 +19,16 @@ class Player():
         self.hand = list()
         self.agent = None
         self.chips = 500  # TODO: Chips could be a class of their own or enums (discretisation).
+        self.is_little_blind = False
+        self.is_big_blind = False
     
     def receive_card(self, card):
         self.hand.append(card)
     
     def get_action(self, game_state):
         '''
-        TODO: Create class.
+        TODO: Game_state should have a variable containing the minimum call amount.
+        TODO: Add the timeout in here.
         '''
         return None
 
@@ -37,6 +40,7 @@ class Player():
         TODO: Do something if they've run out of money or don't have enough.
         TODO: Allow changing the blind sizes somehow.
         '''
+        self.is_little_blind = True
         if self.chips <= constants.BUY_IN:
             raise NotImplementedError("haven't figured those two cases out yet")
         else:
@@ -48,18 +52,9 @@ class Player():
         TODO: Do something if they've run out of money or don't have enough.
         TODO: Allow changing the blind sizes somehow.
         '''
+        self.is_big_blind = True
         if self.chips <= constants.BUY_IN // 2:
             raise NotImplementedError("haven't figured those two cases out yet")
         else:
             self.chips -= constants.BUY_IN // 2
         return constants.BUY_IN // 2
-
-
-'''
-Bet Actions:
-    fold
-    call
-    raise
-    reraise
-    check
-'''

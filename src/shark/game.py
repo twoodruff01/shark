@@ -12,12 +12,13 @@
 # You should have received a copy of the GNU Affero General Public License along with shark. If 
 # not, see <https://www.gnu.org/licenses/>.
 
-import math
-import sys
-
 from . import deck
-from . import player
+from . import players
 from . import constants
+from . import action
+
+import copy
+
 
 class Game():
     '''
@@ -30,10 +31,15 @@ class Game():
         elif constants.PLAYER_COUNT > 9:
             print('player count too high')
             exit(1)
-        self.players  = [player.Player() for _ in range(constants.PLAYER_COUNT)]
+        self.players  = players.Players(constants.PLAYER_COUNT)
         self.game_won = False
-        self.button   = 0
         self.pot      = 0
+
+        # TODO: Figure out how to deal with betting and raising logic.
+        self.raise_amount = constants.BUY_IN
+        self.raise_index = None
+        self.raised = False
+        # self.call_amount = 0  # TODO: Pass to players when asking for action.
 
     def tournament(self):
         print(f'starting new tournament')
@@ -72,12 +78,10 @@ class Game():
 
     def first_bet(self):
         '''
+        TODO: This is really the crux of this whole program.
+
         goes around till everyone is equal and either in or out
-        for player in players:
-            action = func_timeout(player.get_action(new_game))
-            new_game.apply_action(action)
-        '''
-        '''
+
         player at self.button + 1 puts in half the buy-in
         player at self.button + 2 puts in full buy-in
         players from self.button + 2 can fold, call, or raise (agent actions)
@@ -86,18 +90,57 @@ class Game():
         if some-one raises:
             continue till you get back to them
         '''
-        # TODO: Improve betting logic to maybe not use indexes as directly.
-        self.pot += self.get_player(self.button + 1).get_small_blind_bet()  # TODO: Track the fact that they have to match the pot.
-        self.pot += self.get_player(self.button + 2).get_big_blind_bet()
-        for i in range(self.button + 3, int(sys.maxsize - 1)):
-            action = self.get_player(i).get_action(None)  # TODO: Timeout.
+        self.blind_bet(amount=self.players.next_player().get_small_blind_bet(), minimum=constants.BUY_IN // 2)
+        self.blind_bet(amount=self.players.next_player().get_big_blind_bet(), minimum=constants.BUY_IN)
+        while something:  # TODO: Till when?
+            next_player = self.players.next_player()
+            sanitised_game = self.sanitise()
+            action = next_player.get_action(sanitised_game)
             self.apply_action(action)
     
-    def get_player(self, index):
-        return self.players[self.player_index(index)]
+    def blind_bet(self, amount, minimum):
+        if amount < minimum:
+            print('illegal addition to pot below minimum')
+            raise NotImplementedError
+        elif amount == minimum:
+            self.pot += amount
+        else:
+            print('blind raised on pre-flop, is that legal?')
+            raise NotImplementedError
     
-    def apply_action(self, action):
-        pass
+    def apply_action(self, act):
+        '''
+        TODO: This method might just have to be unavoidably messy.
+        '''
+        if self.raised:
+            # TODO: See if this action at least matches the raise.
+            if act.type == action.ActionType.FOLD:
+                raise NotImplementedError
+            if act.type == action.ActionType.CALL:
+                self.pot += act.amount
+                raise NotImplementedError
+            if act.type == action.ActionType.RAISE:
+                self.pot += act.amount
+                raise NotImplementedError
+            if act.type == action.ActionType.CHECK:
+                raise NotImplementedError
+            else:
+                raise TypeError('nonexistent action type given')
+        else:
+            # TODO: Don't have to worry about raises.
+            if act.type == action.ActionType.FOLD:
+                print('why would you fold if noone has raised?')
+                raise NotImplementedError
+            if act.type == action.ActionType.CALL:
+                self.pot += act.amount
+                raise NotImplementedError
+            if act.type == action.ActionType.RAISE:
+                self.pot += act.amount
+                raise NotImplementedError
+            if act.type == action.ActionType.CHECK:
+                raise NotImplementedError
+            else:
+                raise TypeError('nonexistent action type given')
 
     def flop(self):
         '''
@@ -131,9 +174,12 @@ class Game():
         else:
             self.button += 1
     
-    @staticmethod
-    def player_index(index):
-        return index - constants.PLAYER_COUNT * (index // constants.PLAYER_COUNT)
+    def sanitise(self):
+        '''
+        TODO: Remove anything from the game state that you don't want individual players to see
+         i.e. the other players' cards...
+        '''
+        return copy(self)
     
     def collect_cards(self):
         '''

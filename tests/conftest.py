@@ -4,4 +4,4 @@ from src.shark.game import Game
 
 @pytest.fixture
 def game_object():
-    return Game(5)
+    return Game()
