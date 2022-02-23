@@ -10,12 +10,6 @@ This program allows you to simulate poker games and write AI agents to play in t
 - To try out reinforcement learning agents.
 - To get better at poker.
 
-## How?
-
-- Figure out how to play poker (ie the rules) --> Online poker...
-- Design Architecture
-- Code...
-
 ## Running a game
 
 To use this software all you need is Python 3:
