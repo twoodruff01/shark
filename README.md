@@ -20,7 +20,7 @@ To get started:
 sudo apt install expect
 virtualenv env
 source env/bin/activate
-pip install pytest doit
+pip install pytest pytest-cov doit
 ```
 
 See dodo.py for development commands using doit build tool.

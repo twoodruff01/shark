@@ -4,5 +4,6 @@ __pycache__/
 
 *.log
 
+.coverage
 .doit.db
 .swp

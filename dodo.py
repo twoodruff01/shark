@@ -21,6 +21,14 @@ def task_test():
         ]
     }
 
+def task_cov():
+    '''outputs coverage report for test suite'''
+    return {
+        'actions': [
+            "unbuffer pytest -c tests/pytest.ini --cov src/"
+        ]
+    }
+
 def task_lint():
     '''runs linter on all .py files in src'''
     return {
