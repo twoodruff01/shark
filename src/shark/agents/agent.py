@@ -12,6 +12,15 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-from .shark import game_runner
+class Agent():
+    '''
+    All custom agents written by users should inherit from this class.
+    '''
 
-game_runner.run()
+    def get_action(self, game_state, player):
+        '''
+        Agents will be given:
+            - a copy of the game_state which has had some information removed.
+            - a copy of the player object that represents them.
+        '''
+        raise NotImplementedError('you need to override the get_action method with your own version')

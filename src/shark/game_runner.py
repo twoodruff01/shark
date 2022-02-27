@@ -12,10 +12,12 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-from . import game
+from .poker import game
+
 
 def run():
     new_game = game.Game()
     new_game.tournament()
     # new_game.print_deck()
-    # Decide if showing gui or not.
+
+    # print(new_game.players.next_player().index)

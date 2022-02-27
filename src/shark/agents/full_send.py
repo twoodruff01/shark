@@ -12,11 +12,11 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-'''
-TODO: Add CLI parser and arguments instead of this file.
-'''
+from . import agent
+from ..poker import action
 
-PLAYER_COUNT = 5
-HOLE_CARDS   = 2
-THINK_TIME   = 3
-BUY_IN       = 5
+
+class FullSend(agent.Agent):
+    def get_action(self, game_state, player):
+        print('FullSend is going all-in, crazy motherfucker...')
+        return action.Action(action=action.ActionType.RAISE, amount=player.chips)

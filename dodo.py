@@ -2,14 +2,6 @@ DOIT_CONFIG = {
     'verbosity': 2
 }
 
-def task_exec():
-    '''runs src with no arguments'''
-    return {
-        'actions': [
-        'python -m src'
-        ]
-    }
-
 def task_cache():
     '''removes all __pycache__, .pytest_cache, and .doit.db files and directories'''
     return {

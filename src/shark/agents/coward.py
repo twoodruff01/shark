@@ -11,3 +11,13 @@
 #    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
+
+from . import agent
+from ..poker import action
+
+
+class Coward(agent.Agent):
+    def get_action(self, game_state, player):
+        print(f'player {player.index} Coward returns action fold')
+        return action.Action(action.ActionType.FOLD)
+    

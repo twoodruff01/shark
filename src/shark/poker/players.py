@@ -12,29 +12,41 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
+from tkinter import Y
 from . import player
 
 class Players():
     '''
     Pretty much a circular list.
-    TODO: Increment button after a play.
     '''
-    def __init__(self, player_count):
-        self.players  = [player.Player() for _ in range(player_count)]
+    def __init__(self, agents):
+        self.players      = [player.Player(agent, i) for agent, i in zip(agents, range(len(agents)))]
         self.better_index = self._better_index()
-        self.button = 0
+        self.button       = 0
 
-    def next_player(self):
-        return self.players[self.button + next(self.better_index)]
-    
     def _better_index(self):
         '''
         For 5 players the idea is: 0 1 2 3 4 -> 0 1 2 3 4 -> 0 1 2 3 4 -> ...
         '''
-        i = 1
+        i = self.button + 1
         while True:
-            yield i
             if i >= len(self.players) - 1:
                 i = 0
+                yield i
             else:
                 i += 1
+                yield i
+
+    def next_player(self):
+        return self.players[next(self.better_index)]
+    
+    def move_button(self):
+        if self.button == len(self.players) - 1:
+            self.button = 0
+        else:
+            self.button += 1
+        self.better_index = self._better_index()
+        print(f'button moved to player {self.button}')
+    
+    def majority_folded(self):
+        return sum([player.folded for player in self.players]) == 1
