@@ -8,7 +8,8 @@ def task_cache():
         'actions': [
             "find . -type d -name '__pycache__' | xargs rm -rf",
             "find . -type d -name '.pytest_cache' | xargs rm -rf",
-            "rm .doit.db",
+            "rm -f .doit.db",
+            "rm -f .coverage",
             "clear"
         ]
     }
@@ -34,5 +35,13 @@ def task_lint():
     return {
         'actions': [
         'find src -type f -name "*.py" | xargs pylint'
+        ]
+    }
+
+def task_loc():
+    '''calculate lines of code in /src'''
+    return {
+        'actions': [
+            "find src/ -name '*.py' | xargs wc -l"
         ]
     }
