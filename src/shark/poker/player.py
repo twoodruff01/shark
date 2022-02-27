@@ -15,7 +15,7 @@
 from .. import cli
 
 class Player():
-    def __init__(self, agent, index):
+    def __init__(self, index, agent):
         self.index           = index
         self.hand            = list()
         self.agent           = agent()

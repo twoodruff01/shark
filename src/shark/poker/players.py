@@ -12,7 +12,6 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 
-from tkinter import Y
 from . import player
 
 class Players():
@@ -20,8 +19,8 @@ class Players():
     Pretty much a circular list.
     '''
     def __init__(self, agents):
-        self.players      = [player.Player(agent, i) for agent, i in zip(agents, range(len(agents)))]
-        self.better_index = self._better_index()
+        self.players        = [player.Player(i, agent) for agent, i in zip(agents, range(len(agents)))]
+        self.__better_index = self._better_index()
         self.button       = 0
 
     def _better_index(self):
@@ -38,14 +37,14 @@ class Players():
                 yield i
 
     def next_player(self):
-        return self.players[next(self.better_index)]
+        return self.players[next(self.__better_index)]
     
     def move_button(self):
         if self.button == len(self.players) - 1:
             self.button = 0
         else:
             self.button += 1
-        self.better_index = self._better_index()
+        self.__better_index = self._better_index()
         print(f'button moved to player {self.button}')
     
     def majority_folded(self):
