@@ -2,14 +2,6 @@
 
 This program will at some point hopefully allow you to simulate poker games and write AI agents to play in those games.
 
-## Why?
-
-- Because I feel like it?
-- To get experience designing my own application.
-- Maybe to try out multiprocessing.
-- To try out reinforcement learning agents.
-- To get better at poker.
-
 ## Running a game
 
 To run a game all you need is Python 3:
@@ -31,11 +23,19 @@ source env/bin/activate
 pip install pytest doit
 ```
 
-See dodo.py for build commands using doit build tool.
+See dodo.py for development commands using doit build tool.
 
 ```bash
 doit list
 ```
+
+## Why?
+
+- Because I feel like it?
+- To get experience designing my own application.
+- Maybe to try out multiprocessing.
+- To try out reinforcement learning agents.
+- To get better at poker.
 
 ## License
 

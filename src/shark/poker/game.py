@@ -20,7 +20,6 @@ from . import players
 
 class Game():
     '''
-    TODO: Figure out how to move dealer.
     '''
     def __init__(self):
         if cli.PLAYER_COUNT <= 1:
@@ -30,6 +29,7 @@ class Game():
             print('player count too high')
             exit(1)
         self.players  = players.Players(cli.load_agents())
+        self.deck     = deck.Deck()
         self.game_won = False
         self.pot      = 0
 
@@ -47,7 +47,6 @@ class Game():
 
     def play(self):
         print(f'playing a new game')
-        self.deck = deck.Deck()
         self.deal()
         self.first_bet()
         # self.flop()
@@ -58,6 +57,19 @@ class Game():
         # self.bet()
         print('game finished')
         self.cleanup_play()
+
+    #     self.deck = deck.Deck()
+    #     for action in [self.deal,
+    #                    self.bet,
+    #                    self.flop,
+    #                    self.bet,
+    #                    self.turn,
+    #                    self.bet,
+    #                    self.river,
+    #                    self.bet,
+    #                    self.move_dealer]:
+    #         if action():
+    #             return False
 
     def deal(self):
         '''
@@ -122,16 +134,16 @@ class Game():
         TODO: Deal with negative amounts.
         '''
         if act.amount and act.amount < 0:
-            player.folded = True  # TODO: Undo this after round.
+            player.folded = True
             print(f'player {player.index} returned action with negative amount: folding instead')
             return
         elif act.amount and act.amount == 0:
-            player.folded = True  # TODO: Undo this after round.
+            player.folded = True
             print(f'player {player.index} returned action with 0 amount: folding instead')
             return
 
         if act.type == action.ActionType.FOLD:
-            player.folded = True  # TODO: Undo this after round.
+            player.folded = True
             print(f'player {player.index} folds')
         elif act.type == action.ActionType.CALL:
             if player.has_funds(self.raise_amount):
@@ -188,41 +200,10 @@ class Game():
         return self
     
     def cleanup_play(self):
-        self.move_button()
-        self.collect_cards()
-
-        # TODO: Cleanup player attributes.
+        self.players.move_button()
+        self.deck = deck.Deck()
         for player in self.players.players:
+            player.hand.clear()
             player.folded = False
             # player.is_little_blind = False
             # player.is_big_blind = False
-
-    def move_button(self):
-        '''
-        '''
-        self.players.move_button()
-    
-    def collect_cards(self):
-        '''
-        Take the cards out of each player's hand before the next game.
-        '''
-        for player in self.players.players:
-            player.hand.clear()
-    
-    def print_deck(self):
-        for card in self.deck.cards:
-            print(card)
-
-    # def play(self):
-    #     self.deck = deck.Deck()
-    #     for action in [self.deal,
-    #                    self.bet,
-    #                    self.flop,
-    #                    self.bet,
-    #                    self.turn,
-    #                    self.bet,
-    #                    self.river,
-    #                    self.bet,
-    #                    self.move_dealer]:
-    #         if action():
-    #             return False

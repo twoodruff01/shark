@@ -22,6 +22,7 @@
 - two options:
   1. just one log file that everything goes into. Would run into issues if you use multiprocessing for agents.
   2. A game log file, and also one log file per agent.
+- can just be print statements at first, which can be converted to logs after the gui is setup.
 
 ## CLI:
 
